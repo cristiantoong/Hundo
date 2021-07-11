@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Cristian To-ong</title>
+    <title>Hondu: A Coding Project By Cristian To-ong</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,6 +14,8 @@
 
     <link rel="stylesheet" href="css/site.css">
    <!-- Convert this to an external style sheet -->
+
+   <link rel="stylesheet" href="css/prism-dark.css">
 
    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
 
@@ -56,11 +58,71 @@
     <div class="row row-cols-1 row-cols-lg-2">
       <div class="col-lg-8">
         <pre class="line-numbers">
-          <code class="language-javascript">
-            //Call Hello World
-            function HelloWorld(){
-              alert('Hello World');
-            }
+          <code class="language-js">
+              //get the values from the Page
+              //starts or controller function
+              function getValues(e){
+                e.preventDefault()
+                //get values from the page
+                let startValue = document.getElementById("startValue").value;
+                let endValue = document.getElementById("endValue").value;
+
+                //parse into Integeers
+                startValue = parseInt(startValue);
+                endValue = parseInt(endValue);
+
+                //check if values are integer
+                if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                  //we call generateNumbers
+                  let numbers = generateNumbers(startValue, endValue)
+                  console.log(numbers)
+                    //we call displayNumbers
+                  displayNumbers(numbers)
+                } else {
+                  alert("You must enter integers");
+                }
+
+              }
+
+              //generate numbers from startvalue to the end value
+              //logic function(S)
+              function generateNumbers(sValue, eValue){
+                let numbers = []
+                //we want to get all numbers from to start to end
+                for(let index = sValue; index <= eValue; index++){
+                  //this will execite in a loop until index = eValue
+                  numbers.push(index);
+
+                }
+
+                return numbers;
+
+              }
+
+
+              //display the numbers and mark even numbers bold
+              //display or view functions
+              function displayNumbers(numbers){
+                let templateRows = "";
+
+                for (let index = 0; index < numbers.length; index++) {
+
+                  let className = "even"
+                  let number = numbers[index];
+
+                  if(number % 2 == 0){
+                    className = "even"
+                  } else {
+                    className = "odd"
+                  }
+                  
+                  //This does render correctly with Prism see the source
+                  templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                }
+
+                document.getElementById("results").innerHTML = templateRows;
+
+              }
           </code>
         </pre>
       </div>
@@ -104,6 +166,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <script src="js/prism-dark.js"></script>
 </body>
 
 </html>
